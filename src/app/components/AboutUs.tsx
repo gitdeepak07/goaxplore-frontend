@@ -6,7 +6,7 @@ export function AboutUs({ onExploreActivities }: { onExploreActivities: () => vo
   const [stats, setStats] = useState({ providers: '25+', activities: '50+', users: '10K+' });
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/dashboard/admin')
+    fetch('${API}/api/dashboard/admin')
       .then(r => r.json())
       .then(data => {
         setStats({

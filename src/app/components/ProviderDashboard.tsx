@@ -29,6 +29,7 @@ import {
 import { AddActivityModal } from "./provider/AddActivityModal";
 import { SlotManagementModal } from "./provider/SlotManagementModal";
 import { CreateOfferModal } from "./provider/CreateOfferModal";
+import API from "../config/api";
 
 interface ProviderDashboardProps {
   provider: any;
@@ -67,7 +68,7 @@ export function ProviderDashboard({ provider, onLogout, onBackToHome }: Provider
   useEffect(() => {
     // Load activities from API
     if (providerId) {
-      fetch(`http://localhost:5000/api/providers/${providerId}/activities`)
+      fetch(`${API}/api/providers/${providerId}/activities`)
         .then(r => r.json())
         .then(data => {
           const arr = Array.isArray(data) ? data : []
@@ -87,7 +88,7 @@ export function ProviderDashboard({ provider, onLogout, onBackToHome }: Provider
         })
 
       // Load bookings from API
-      fetch(`http://localhost:5000/api/bookings/provider/${providerId}`)
+      fetch(`${API}/api/bookings/provider/${providerId}`)
         .then(r => r.json())
         .then(data => {
           const arr = Array.isArray(data) ? data : []
@@ -111,7 +112,7 @@ export function ProviderDashboard({ provider, onLogout, onBackToHome }: Provider
           if (stored) setBookings(JSON.parse(stored))
         })
       // Load offers from API
-      fetch(`http://localhost:5000/api/offers/provider/${providerId}`)
+      fetch(`${API}/api/offers/provider/${providerId}`)
         .then(r => r.json())
         .then(data => {
           const arr = Array.isArray(data) ? data : []
@@ -136,13 +137,13 @@ export function ProviderDashboard({ provider, onLogout, onBackToHome }: Provider
         })
 
       // Load provider notifications from API
-      fetch(`http://localhost:5000/api/notifications/provider/${providerId}`)
+      fetch(`${API}/api/notifications/provider/${providerId}`)
         .then(r => r.json())
         .then(data => setNotifications(Array.isArray(data) ? data : []))
         .catch(() => setNotifications([]))
 
       // Fetch fresh provider profile (including verification_status)
-      fetch(`http://localhost:5000/api/providers/${providerId}/profile`)
+      fetch(`${API}/api/providers/${providerId}/profile`)
         .then(r => r.json())
         .then(data => {
           if (data && !data.error) {
@@ -161,14 +162,14 @@ export function ProviderDashboard({ provider, onLogout, onBackToHome }: Provider
 
       // Poll notifications every 20s
       const fetchProviderNotifs = () => {
-        fetch(`http://localhost:5000/api/notifications/provider/${providerId}`)
+        fetch(`${API}/api/notifications/provider/${providerId}`)
           .then(r => r.json())
           .then(data => setNotifications(Array.isArray(data) ? data : []))
           .catch(() => {})
       }
       // Poll bookings every 30s for new pending requests
       const fetchProviderBookings = () => {
-        fetch(`http://localhost:5000/api/bookings/provider/${providerId}`)
+        fetch(`${API}/api/bookings/provider/${providerId}`)
           .then(r => r.json())
           .then(data => {
             const arr = Array.isArray(data) ? data : []
@@ -217,7 +218,7 @@ export function ProviderDashboard({ provider, onLogout, onBackToHome }: Provider
     if (editingActivity) {
       const realId = activity.activity_id || activity.id
       try {
-        await fetch(`http://localhost:5000/api/activities/${realId}`, {
+        await fetch(`${API}/api/activities/${realId}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -247,7 +248,7 @@ export function ProviderDashboard({ provider, onLogout, onBackToHome }: Provider
     const realId = activity?.activity_id || activityId;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/activities/${realId}`, {
+      const res = await fetch(`${API}/api/activities/${realId}`, {
         method: "DELETE",
       });
 
@@ -272,7 +273,7 @@ export function ProviderDashboard({ provider, onLogout, onBackToHome }: Provider
     const booking = bookings.find(b => b.id === bookingId)
     const realId = booking?.booking_id ?? bookingId
     try {
-      await fetch(`http://localhost:5000/api/bookings/${realId}/approve`, { method: "PATCH" })
+      await fetch(`${API}/api/bookings/${realId}/approve`, { method: "PATCH" })
     } catch (err) { console.warn("Approve API error:", err) }
     setBookings(prev => prev.map(b => b.id === bookingId ? { ...b, status: 'confirmed' } : b))
   };
@@ -283,7 +284,7 @@ export function ProviderDashboard({ provider, onLogout, onBackToHome }: Provider
     const booking = bookings.find(b => b.id === bookingId)
     const realId = booking?.booking_id ?? bookingId
     try {
-      await fetch(`http://localhost:5000/api/bookings/${realId}/reject`, {
+      await fetch(`${API}/api/bookings/${realId}/reject`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ reason: reason || 'Provider declined' })
@@ -296,7 +297,7 @@ export function ProviderDashboard({ provider, onLogout, onBackToHome }: Provider
   const booking = bookings.find(b => b.id === bookingId);
   const realId = booking?.booking_id ?? bookingId;
   try {
-    await fetch(`http://localhost:5000/api/bookings/${realId}/complete`, { method: 'PATCH' });
+    await fetch(`${API}/api/bookings/${realId}/complete`, { method: 'PATCH' });
   } catch (err) { console.warn('Complete API error:', err); }
   setBookings(prev => prev.map(b => b.id === bookingId ? { ...b, status: 'completed' } : b));
 };
@@ -311,7 +312,7 @@ export function ProviderDashboard({ provider, onLogout, onBackToHome }: Provider
     if (editingOffer) {
       const realId = offer.offer_id || offer.id
       try {
-        await fetch(`http://localhost:5000/api/offers/${realId}`, {
+        await fetch(`${API}/api/offers/${realId}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(offer)
@@ -321,7 +322,7 @@ export function ProviderDashboard({ provider, onLogout, onBackToHome }: Provider
     } else {
       // createOffer API call is handled inside CreateOfferModal — just refresh
       try {
-        const res = await fetch(`http://localhost:5000/api/offers/provider/${providerId}`)
+        const res = await fetch(`${API}/api/offers/provider/${providerId}`)
         const data = await res.json()
         const arr = Array.isArray(data) ? data : []
         setOffers(arr.map((o: any) => ({
@@ -348,7 +349,7 @@ export function ProviderDashboard({ provider, onLogout, onBackToHome }: Provider
     const offer = offers.find(o => o.id === offerId || o.offer_id === offerId)
     const realId = offer?.offer_id || offerId
     try {
-      await fetch(`http://localhost:5000/api/offers/${realId}`, { method: 'DELETE' })
+      await fetch(`${API}/api/offers/${realId}`, { method: 'DELETE' })
     } catch (err) { console.warn('Delete offer error') }
     saveOffers(offers.filter(o => o.id !== offerId && o.offer_id !== realId))
   };
@@ -1303,7 +1304,7 @@ export function ProviderDashboard({ provider, onLogout, onBackToHome }: Provider
                     const msgEl = document.getElementById('profile-save-msg');
                     if (msgEl) { msgEl.textContent = 'Saving...'; msgEl.className = 'text-sm text-gray-400'; }
                     try {
-                      const res = await fetch(`http://localhost:5000/api/providers/${providerId}`, {
+                      const res = await fetch(`${API}/api/providers/${providerId}`, {
                         method: 'PATCH',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
@@ -1316,7 +1317,7 @@ export function ProviderDashboard({ provider, onLogout, onBackToHome }: Provider
                       if (res.ok) {
                         if (msgEl) { msgEl.textContent = '✓ Saved!'; msgEl.className = 'text-sm text-green-400'; }
                         // Re-fetch fresh profile including verification_status
-                        const fresh = await fetch(`http://localhost:5000/api/providers/${providerId}/profile`);
+                        const fresh = await fetch(`${API}/api/providers/${providerId}/profile`);
                         if (fresh.ok) {
                           const data = await fresh.json();
                           setProviderProfile({

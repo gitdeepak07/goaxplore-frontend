@@ -50,7 +50,7 @@ import {
   getStoredCustomerSession,
 } from "../utils/auth";
 
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = `${API}/api`;
 
 const fallbackActivities = Object.values(activityLibrary).map((activity, index) =>
   enhanceActivity(

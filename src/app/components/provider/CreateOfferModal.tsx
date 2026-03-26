@@ -1,5 +1,6 @@
 import { X } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import API from "../../config/api";
 
 interface CreateOfferModalProps {
   isOpen: boolean
@@ -76,7 +77,7 @@ export function CreateOfferModal({
     try {
       if (editingOffer) {
         const realId = editingOffer.offer_id || editingOffer.id;
-        const res = await fetch(`http://localhost:5000/api/offers/${realId}`, {
+        const res = await fetch(`${API}/api/offers/${realId}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
@@ -89,7 +90,7 @@ export function CreateOfferModal({
         }
         onSaveOffer({ ...editingOffer, ...formData, discount_value: payload.discount_value, valid_from: formData.validFrom, valid_to: formData.validTo });
       } else {
-        const res = await fetch('http://localhost:5000/api/offers', {
+        const res = await fetch('${API}/api/offers', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),

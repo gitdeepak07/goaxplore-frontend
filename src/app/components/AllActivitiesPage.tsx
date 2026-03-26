@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { formatMoney } from "../config/bookingFlow";
 
-const API = "http://localhost:5000/api";
+const API = "${API}/api";
 
 interface Activity {
   id: number;
@@ -68,7 +68,7 @@ export function AllActivitiesPage({
       const wishlistId = existing?.wishlist_id;
       if (wishlistId) {
         try {
-          await fetch(`http://localhost:5000/api/wishlist/${wishlistId}`, { method: 'DELETE' });
+          await fetch(`${API}/api/wishlist/${wishlistId}`, { method: 'DELETE' });
         } catch { /* silent */ }
       }
       items = items.filter((item: any) =>
@@ -79,12 +79,12 @@ export function AllActivitiesPage({
     } else {
       let wishlistId: number | null = null;
       try {
-        await fetch('http://localhost:5000/api/wishlist', {
+        await fetch('${API}/api/wishlist', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ user_id: currentUserId, activity_id: activity.id }),
         });
-        const listRes = await fetch(`http://localhost:5000/api/wishlist/${currentUserId}`);
+        const listRes = await fetch(`${API}/api/wishlist/${currentUserId}`);
         if (listRes.ok) {
           const list = await listRes.json();
           const match = list.find((w: any) => Number(w.activity_id) === Number(activity.id));

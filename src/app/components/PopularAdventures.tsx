@@ -2,6 +2,7 @@ import { Clock3, Heart, Star } from "lucide-react";
 import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { formatMoney } from "../config/bookingFlow";
+import API from "../config/api";
 
 interface Adventure {
   id: number;
@@ -65,7 +66,7 @@ export function PopularAdventures({
       const wishlistId = existing?.wishlist_id;
       if (wishlistId) {
         try {
-          await fetch(`http://localhost:5000/api/wishlist/${wishlistId}`, { method: 'DELETE' });
+          await fetch(`${API}/api/wishlist/${wishlistId}`, { method: 'DELETE' });
         } catch { /* silent */ }
       }
       items = items.filter((item: any) =>
@@ -76,13 +77,13 @@ export function PopularAdventures({
     } else {
       let wishlistId: number | null = null;
       try {
-        const res = await fetch('http://localhost:5000/api/wishlist', {
+        const res = await fetch('${API}/api/wishlist', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ user_id: currentUserId, activity_id: adventure.id }),
         });
         // fetch back to get wishlist_id
-        const listRes = await fetch(`http://localhost:5000/api/wishlist/${currentUserId}`);
+        const listRes = await fetch(`${API}/api/wishlist/${currentUserId}`);
         if (listRes.ok) {
           const list = await listRes.json();
           const match = list.find((w: any) => Number(w.activity_id) === Number(adventure.id));

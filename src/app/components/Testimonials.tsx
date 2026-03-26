@@ -25,7 +25,7 @@ export function Testimonials({ testimonials: fallbackTestimonials, currentUser }
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/reviews/public')
+    fetch('${API}/api/reviews/public')
       .then(r => r.json())
       .then(data => {
         const raw = Array.isArray(data) ? data : [];
@@ -50,7 +50,7 @@ export function Testimonials({ testimonials: fallbackTestimonials, currentUser }
     try {
       const userId = currentUser?.user_id || currentUser?.id;
       if (userId) {
-        await fetch('http://localhost:5000/api/reviews/site', {
+        await fetch('${API}/api/reviews/site', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ user_id: userId, rating: newRating, comment: newComment }),

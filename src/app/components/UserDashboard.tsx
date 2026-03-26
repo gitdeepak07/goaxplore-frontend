@@ -83,7 +83,7 @@ useEffect(() => {
     // Fetch bookings from DB
     const fetchBookings = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/bookings/user/${userId}`);
+        const response = await fetch(`${API}/api/bookings/user/${userId}`);
         if (response.ok) {
           const data = await response.json();
           const raw = data.bookings || data || [];
@@ -116,7 +116,7 @@ useEffect(() => {
     // Fetch wishlist from DB
     const fetchWishlist = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/wishlist/${userId}`);
+        const response = await fetch(`${API}/api/wishlist/${userId}`);
         if (response.ok) {
           const data = await response.json();
           const raw = Array.isArray(data) ? data : (data.wishlist || []);
@@ -139,7 +139,7 @@ useEffect(() => {
     // Fetch reviews from DB
     const fetchReviews = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/reviews/user/${userId}`);
+        const response = await fetch(`${API}/api/reviews/user/${userId}`);
         if (response.ok) {
           const data = await response.json();
           const raw = Array.isArray(data) ? data : [];
@@ -161,7 +161,7 @@ useEffect(() => {
     // Fetch notifications from DB
     const fetchNotifications = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/notifications/${userId}`);
+        const response = await fetch(`${API}/api/notifications/${userId}`);
         if (response.ok) {
           const data = await response.json();
           setNotifications(data || []);
@@ -175,7 +175,7 @@ useEffect(() => {
     // Fetch support tickets from DB
     const fetchSupport = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/support/user/${userId}`);
+        const response = await fetch(`${API}/api/support/user/${userId}`);
         if (response.ok) {
           const data = await response.json();
           setSupportTickets(Array.isArray(data) ? data : []);
@@ -199,7 +199,7 @@ useEffect(() => {
   const handleUpdateProfile = async () => {
     const userId = user?.user_id || user?.id;
     try {
-      const res = await fetch(`http://localhost:5000/api/auth/update-profile`, {
+      const res = await fetch(`${API}/api/auth/update-profile`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -228,7 +228,7 @@ useEffect(() => {
     try {
       const booking = bookings.find(b => b.id === bookingId || b.booking_id === bookingId);
       const realId = booking?.booking_id || bookingId;
-      const res = await fetch(`http://localhost:5000/api/bookings/${realId}/cancel`, {
+      const res = await fetch(`${API}/api/bookings/${realId}/cancel`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' }
       });
@@ -249,7 +249,7 @@ useEffect(() => {
     const booking = bookings.find(b => b.id === bookingId);
     const realId = booking?.booking_id || bookingId;
     try {
-      await fetch(`http://localhost:5000/api/bookings/${realId}/pay`, {
+      await fetch(`${API}/api/bookings/${realId}/pay`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' }
       });
@@ -316,7 +316,7 @@ useEffect(() => {
     try {
       const item = wishlist.find(i => i.id === itemId || i.wishlist_id === itemId);
       const realId = item?.wishlist_id || itemId;
-      await fetch(`http://localhost:5000/api/wishlist/${realId}`, { method: 'DELETE' });
+      await fetch(`${API}/api/wishlist/${realId}`, { method: 'DELETE' });
     } catch (err) {
       console.warn('Wishlist remove error');
     }
@@ -327,7 +327,7 @@ useEffect(() => {
     const userId = user?.user_id || user?.id;
     if (!supportForm.subject || !supportForm.description) return;
     try {
-      const res = await fetch('http://localhost:5000/api/support', {
+      const res = await fetch('${API}/api/support', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -394,7 +394,7 @@ useEffect(() => {
 
   const markNotificationRead = async (notifId: string) => {
     try {
-      await fetch(`http://localhost:5000/api/notifications/read/${notifId}`, { method: 'PATCH' });
+      await fetch(`${API}/api/notifications/read/${notifId}`, { method: 'PATCH' });
       setNotifications(prev => prev.map(n =>
         (String(n.notification_id) === String(notifId) || String(n.id) === String(notifId))
           ? { ...n, is_read: true, read: true } : n
@@ -1291,7 +1291,7 @@ useEffect(() => {
                       return;
                     }
                     try {
-                      const res = await fetch(`http://localhost:5000/api/auth/change-password/${user.user_id}`, {
+                      const res = await fetch(`${API}/api/auth/change-password/${user.user_id}`, {
                         method: "PUT",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ current_password: passwordForm.current, new_password: passwordForm.newPass }),
