@@ -35,7 +35,7 @@ interface AdminDashboardProps {
   onBackToHome?: () => void;
 }
 
-export const API_BASE = "${API}/api";
+export const API_BASE = '${API}/api';
 
 export function AdminDashboard({ admin, onLogout, onBackToHome }: AdminDashboardProps) {
   const [showProfileMenu, setShowProfileMenu] = useState(false);

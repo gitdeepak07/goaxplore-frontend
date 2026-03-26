@@ -1,4 +1,4 @@
-const API_BASE = "${API}/api";
+const API_BASE = '${API}/api';
 
 export const CUSTOMER_SESSION_STORAGE_KEY = "goaxplore_current_user";
 export const CUSTOMER_TOKEN_STORAGE_KEY = "user_token";

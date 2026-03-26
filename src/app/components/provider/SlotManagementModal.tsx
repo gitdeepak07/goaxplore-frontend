@@ -1,7 +1,7 @@
 import { X, Plus, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 
-const API = "${API}/api";
+const API = '${API}/api';
 
 interface SlotManagementModalProps {
   isOpen: boolean;

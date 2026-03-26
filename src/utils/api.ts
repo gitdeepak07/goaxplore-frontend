@@ -1,4 +1,4 @@
-const API = "${API}/api"
+const API = '${API}/api';
 
 export async function getBookedSlots(activityId: number, /*date string*/) {
   try {

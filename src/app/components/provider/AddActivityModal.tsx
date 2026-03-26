@@ -2,7 +2,7 @@ import { X, Plus, Trash2, MapPin } from 'lucide-react';
 import { useState, useEffect, useRef } from 'react';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
-const API = "${API}/api";
+const API = '${API}/api';
 const GOOGLE_MAPS_API_KEY = (import.meta as any).env?.VITE_GOOGLE_MAPS_API_KEY ?? "";
 
 interface AddActivityModalProps {

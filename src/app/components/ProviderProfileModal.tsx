@@ -1,7 +1,7 @@
 import { X, MapPin, Star, Shield, Phone, Mail, Clock } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
-const API = "${API}/api";
+const API = '${API}/api';
 
 interface ProviderProfileModalProps {
   isOpen: boolean;

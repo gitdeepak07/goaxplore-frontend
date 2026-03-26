@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { formatMoney } from "../config/bookingFlow";
 
-const API = "${API}/api";
+const API = '{API}/api';
 
 interface Activity {
   id: number;
