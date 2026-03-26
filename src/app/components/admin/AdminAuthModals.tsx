@@ -1,5 +1,6 @@
 import { X, Mail, Lock, Shield, Loader2 } from "lucide-react";
 import { useState } from "react";
+import API from "../../config/api";
 
 interface AdminAuthModalsProps {
   isLoginOpen: boolean;
@@ -24,7 +25,7 @@ export function AdminAuthModals({
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/admin/login", {
+      const res = await fetch(`${API}/api/admin/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

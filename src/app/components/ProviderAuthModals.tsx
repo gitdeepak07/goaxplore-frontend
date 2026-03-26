@@ -1,7 +1,8 @@
 import { X} from "lucide-react";
 import { useState } from "react";
+import API from "../config/api";
 
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = `${API}/api`;
 
 const normalizeProvider = (provider: any) => ({
   ...provider,
@@ -57,7 +58,7 @@ export function ProviderAuthModals({
     setLoginError("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/providers/login", {
+      const res = await fetch(`${API}/api/providers/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

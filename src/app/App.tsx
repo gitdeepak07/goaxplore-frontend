@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
+import API from "./config/api";
 
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
@@ -251,7 +252,7 @@ export default function App() {
 
   // ─── useEffect 2: Fetch activities + providers from DB ─────────────────────
   useEffect(() => {
-    fetch("http://localhost:5000/api/offers/public")
+    fetch(`${API}/api/offers/public`)
       .then(r => r.json())
       .then(data => setPublicOffers(data.offers || []))
       .catch(() => { });

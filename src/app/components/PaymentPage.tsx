@@ -1,6 +1,7 @@
 import { ArrowLeft, ShieldCheck, CreditCard, Smartphone, Building } from "lucide-react";
 import { useState } from "react";
 import { formatMoney } from "../config/bookingFlow";
+import API from "../config/api";
 
 type PaymentMethod = "card" | "upi" | "netbanking";
 
@@ -37,7 +38,7 @@ export function PaymentPage({
     setIsProcessing(true);
     try {
       // Step 1 — Create Cashfree order
-      const orderRes = await fetch("http://localhost:5000/api/cashfree/create-order", {
+      const orderRes = await fetch(`${API}/api/cashfree/create-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -71,7 +72,7 @@ export function PaymentPage({
         }
 
         // Step 3 — Verify payment
-        const verifyRes = await fetch("http://localhost:5000/api/cashfree/verify", {
+        const verifyRes = await fetch(`${API}/api/cashfree/verify`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
