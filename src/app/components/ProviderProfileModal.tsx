@@ -1,7 +1,8 @@
 import { X, MapPin, Star, Shield, Phone, Mail, Clock } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import API from "../config/api";
 
-const API = '${API}/api';
+const API_BASE = `${API}/api`;
 
 interface ProviderProfileModalProps {
   isOpen: boolean;
@@ -25,9 +26,9 @@ export function ProviderProfileModal({ isOpen, onClose, provider, onBookActivity
     setLoading(true);
 
     Promise.all([
-      fetch(`${API}/providers/${providerId}`).then(r => r.json()),
-      fetch(`${API}/reviews/provider/${providerId}/rating`).then(r => r.json()),
-      fetch(`${API}/reviews/provider/${providerId}`).then(r => r.json()),
+      fetch(`${API_BASE}/providers/${providerId}`).then(r => r.json()),
+      fetch(`${API_BASE}/reviews/provider/${providerId}/rating`).then(r => r.json()),
+      fetch(`${API_BASE}/reviews/provider/${providerId}`).then(r => r.json()),
     ])
       .then(([details, ratingData, reviewsData]) => {
         setProviderDetails(details);

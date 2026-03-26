@@ -2,8 +2,9 @@ import { Clock3, Filter, Heart, MapPin, Search, Star, X, ArrowLeft } from "lucid
 import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import { formatMoney } from "../config/bookingFlow";
+import API from "../config/api";
 
-const API = '{API}/api';
+const API_BASE = `${API}/api`;
 
 interface Activity {
   id: number;
@@ -68,7 +69,7 @@ export function AllActivitiesPage({
       const wishlistId = existing?.wishlist_id;
       if (wishlistId) {
         try {
-          await fetch(`${API}/api/wishlist/${wishlistId}`, { method: 'DELETE' });
+          await fetch(`${API_BASE}/wishlist/${wishlistId}`, { method: 'DELETE' });
         } catch { /* silent */ }
       }
       items = items.filter((item: any) =>
@@ -79,12 +80,12 @@ export function AllActivitiesPage({
     } else {
       let wishlistId: number | null = null;
       try {
-        await fetch('${API}/api/wishlist', {
+        await fetch(`${API_BASE}/wishlist`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ user_id: currentUserId, activity_id: activity.id }),
         });
-        const listRes = await fetch(`${API}/api/wishlist/${currentUserId}`);
+        const listRes = await fetch(`${API_BASE}/wishlist/${currentUserId}`);
         if (listRes.ok) {
           const list = await listRes.json();
           const match = list.find((w: any) => Number(w.activity_id) === Number(activity.id));
@@ -107,7 +108,7 @@ export function AllActivitiesPage({
   };
 
   useEffect(() => {
-    fetch(`${API}/locations`)
+    fetch(`${API_BASE}/locations`)
       .then((r) => r.json())
       .then((data) => setApiLocations(Array.isArray(data) ? data : []))
       .catch(() => setApiLocations([]));

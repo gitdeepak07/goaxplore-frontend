@@ -1,8 +1,9 @@
 import { X, Plus, Trash2, MapPin } from 'lucide-react';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import API from "../../config/api";
 
-const API = '${API}/api';
+const API_BASE = `${API}/api`;
 const GOOGLE_MAPS_API_KEY = (import.meta as any).env?.VITE_GOOGLE_MAPS_API_KEY ?? "";
 
 interface AddActivityModalProps {
@@ -115,7 +116,7 @@ export function AddActivityModal({
   useEffect(() => {
     if (!isOpen) return;
 
-    fetch(`${API}/categories`)
+    fetch(`${API_BASE}/categories`)
       .then(r => r.json())
       .then(data => setCategories(Array.isArray(data) ? data : []))
       .catch(() => setCategories([
@@ -126,7 +127,7 @@ export function AddActivityModal({
         { category_id: 6, name: 'Group Fun' },
       ]));
 
-    fetch(`${API}/locations`)
+    fetch(`${API_BASE}/locations`)
       .then(r => r.json())
       .then(data => setLocations(Array.isArray(data) ? data : []))
       .catch(() => setLocations([
@@ -188,7 +189,7 @@ export function AddActivityModal({
         // If provider pinned a custom location, update that location's coords
 
 
-        const res = await fetch(`${API}/activities`, {
+        const res = await fetch(`${API_BASE}/activities`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

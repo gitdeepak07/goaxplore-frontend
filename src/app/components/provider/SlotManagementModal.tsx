@@ -1,7 +1,8 @@
 import { X, Plus, Trash2 } from 'lucide-react';
 import { useState } from 'react';
+import API from "../../config/api";
 
-const API = '${API}/api';
+const API_BASE = `${API}/api`;
 
 interface SlotManagementModalProps {
   isOpen: boolean;
@@ -61,7 +62,7 @@ export function SlotManagementModal({ isOpen, onClose, activity, onSaveSlots }: 
       for (const ts of slot.timeSlots) {
         if (!slot.date || !ts.time || !ts.capacity) continue;
         try {
-          const res = await fetch(`${API}/slots`, {
+          const res = await fetch(`${API_BASE}/slots`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

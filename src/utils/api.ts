@@ -1,8 +1,10 @@
-const API = '${API}/api';
+import API from "../app/config/api";
+
+const API_BASE = `${API}/api`;
 
 export async function getBookedSlots(activityId: number, /*date string*/) {
   try {
-    const res = await fetch(`${API}/slots/${activityId}`)
+    const res = await fetch(`${API_BASE}/slots/${activityId}`)
     const json = await res.json()
 
     // backend returns plain array
@@ -17,7 +19,7 @@ export async function getBookedSlots(activityId: number, /*date string*/) {
 }
 
 export async function createBooking(data: any) {
-  const res = await fetch(`${API}/bookings`, {
+  const res = await fetch(`${API_BASE}/bookings`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data)

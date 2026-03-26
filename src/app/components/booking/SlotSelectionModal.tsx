@@ -6,8 +6,9 @@ import {
   formatMoney,
   getFutureDates,
 } from "../../config/bookingFlow";
+import API from "../../config/api";
 
-const API_BASE = '${API}/api';
+const API_BASE = `${API}/api`;
 
 interface SlotSelectionModalProps {
   isOpen: boolean;
