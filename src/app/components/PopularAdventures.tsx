@@ -73,7 +73,7 @@ export function PopularAdventures({
         (typeof item === "object" ? Number(item.id) : Number(item)) !== Number(adventure.id)
       );
       setWishlist((prev) => prev.filter((id) => id !== adventure.id));
-      toast.success("Removed from wishlist");
+      toast.success("Removed FROM wishlist");
     } else {
       let wishlistId: number | null = null;
       try {
@@ -173,7 +173,7 @@ export function PopularAdventures({
                         {/* Wishlist button */}
                         <button
                           onClick={(e) => toggleWishlist(adventure, e)}
-                          title={currentUserId ? (isWishlisted ? "Remove from wishlist" : "Add to wishlist") : "Login to add to wishlist"}
+                          title={currentUserId ? (isWishlisted ? "Remove FROM wishlist" : "Add to wishlist") : "Login to add to wishlist"}
                           className={`rounded-full p-1.5 transition-colors ${
                             isWishlisted
                               ? "bg-red-500/20 text-red-400"

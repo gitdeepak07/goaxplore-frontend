@@ -495,7 +495,7 @@ export function AddActivityModal({
             </button>
             <button type="submit" disabled={isSubmitting}
               className="flex-1 bg-red-600 hover:bg-red-700 text-white py-3 rounded-md transition-colors font-semibold disabled:opacity-60">
-              {isSubmitting ? 'Saving to DB...' : editingActivity ? 'Update Activity' : 'Create Activity'}
+              {isSubmitting ? 'Saving to DB...' : editingActivity ? 'UPDATE activity' : 'Create Activity'}
             </button>
           </div>
 

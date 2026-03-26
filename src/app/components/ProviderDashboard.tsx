@@ -232,7 +232,7 @@ export function ProviderDashboard({ provider, onLogout, onBackToHome }: Provider
             location_id: activity.location_id || null,
           })
         })
-      } catch (err) { console.warn('Update activity error:', err) }
+      } catch (err) { console.warn('UPDATE activity error:', err) }
       saveActivities(activities.map(a => (a.id === activity.id || a.activity_id === realId) ? { ...a, ...activity } : a))
     } else {
       saveActivities([...activities, activity])
@@ -317,7 +317,7 @@ export function ProviderDashboard({ provider, onLogout, onBackToHome }: Provider
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(offer)
         })
-      } catch (err) { console.warn('Update offer error') }
+      } catch (err) { console.warn('UPDATE offer error') }
       saveOffers(offers.map(o => (o.id === offer.id || o.offer_id === realId) ? { ...o, ...offer } : o))
     } else {
       // createOffer API call is handled inside CreateOfferModal — just refresh

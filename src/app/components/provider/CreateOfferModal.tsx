@@ -84,7 +84,7 @@ export function CreateOfferModal({
         });
         if (!res.ok) {
           const err = await res.json();
-          setSaveError(err.message || 'Failed to update offer');
+          setSaveError(err.message || 'Failed to UPDATE offer');
           setSaving(false);
           return;
         }
@@ -260,7 +260,7 @@ export function CreateOfferModal({
               disabled={saving}
               className="flex-1 bg-red-600 hover:bg-red-700 disabled:opacity-60 text-white py-3 rounded-md transition-colors font-semibold"
             >
-              {saving ? 'Saving...' : editingOffer ? 'Update Offer' : 'Create Offer'}
+              {saving ? 'Saving...' : editingOffer ? 'UPDATE offer' : 'Create Offer'}
             </button>
           </div>
           {saveError && (

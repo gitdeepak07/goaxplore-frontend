@@ -75,7 +75,7 @@ export function AllActivitiesPage({
         (typeof item === "object" ? Number(item.id) : Number(item)) !== Number(activity.id)
       );
       setWishlist((prev) => prev.filter((id) => id !== activity.id));
-      toast.success("Removed from wishlist");
+      toast.success("Removed FROM wishlist");
     } else {
       let wishlistId: number | null = null;
       try {
