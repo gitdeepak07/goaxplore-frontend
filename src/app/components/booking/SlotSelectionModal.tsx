@@ -7,7 +7,7 @@ import {
   getFutureDates,
 } from "../../config/bookingFlow";
 
-const API_BASE = '${API}/api"';
+const API_BASE = '${API}/api';
 
 interface SlotSelectionModalProps {
   isOpen: boolean;
