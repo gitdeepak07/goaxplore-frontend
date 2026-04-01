@@ -20,6 +20,7 @@ import { ActivityDetailsModal } from "./components/ActivityDetailsModal";
 import { ProviderProfileModal } from "./components/ProviderProfileModal";
 import { AllActivitiesPage } from "./components/AllActivitiesPage";
 
+
 import { PaymentPage } from "./components/PaymentPage";
 import { UserDashboard } from "./components/UserDashboard";
 import { ProviderDashboard } from "./components/ProviderDashboard";
@@ -221,6 +222,7 @@ export default function App() {
   const [bookedSlots, setBookedSlots] = useState<string[]>([]); // kept for mergeBookedSlots after booking
   const [isLoading, setIsLoading] = useState(false);
   const [publicOffers, setPublicOffers] = useState<any[]>([]);
+  const [appliedOffer, setAppliedOffer] = useState<any>(null);
 
   // ─── useEffect 1: Session restore ──────────────────────────────────────────
   useEffect(() => {
@@ -503,6 +505,7 @@ export default function App() {
       time: selectedTime,
       slot_id: selectedSlotId,
       totalPrice: Number(selectedActivity.price || 0) * selectedParticipants,
+      appliedOffer: appliedOffer || null,
     };
 
     setPendingBooking(bookingDraft);
@@ -863,6 +866,16 @@ export default function App() {
           participants={pendingBooking?.participants || selectedParticipants}
           date={pendingBooking?.date || selectedDate}
           time={pendingBooking?.time || selectedTime}
+          appliedOffer={pendingBooking?.appliedOffer || null}
+          publicOffers={publicOffers}
+          onApplyOffer={(offer: any) => {
+            setAppliedOffer(offer);
+            setPendingBooking((prev: any) => prev ? { ...prev, appliedOffer: offer } : prev);
+          }}
+          onRemoveOffer={() => {
+            setAppliedOffer(null);
+            setPendingBooking((prev: any) => prev ? { ...prev, appliedOffer: null } : prev);
+          }}
           onClose={() => { setIsBookingSummaryOpen(false); setIsSlotSelectionOpen(true); }}
           onCloseFlow={handleCloseBookingFlow}
           onContinue={handleContinueToPayment}
@@ -879,7 +892,14 @@ export default function App() {
                 date: pendingBooking.date,
                 time: pendingBooking.time,
                 participants: pendingBooking.participants,
-                totalPrice: pendingBooking.totalPrice,
+                totalPrice: (() => {
+                  const base = pendingBooking.totalPrice;
+                  const offer = pendingBooking.appliedOffer;
+                  if (!offer) return base;
+                  if (offer.discount_type === 'Percent' || offer.discount_type === 'percentage')
+                    return Math.round(base - (base * offer.discount_value / 100));
+                  return Math.max(0, base - offer.discount_value);
+                })(),
                 booking_id: (pendingBooking as any).booking_id,
                 customer_name: currentUser?.full_name || "GoaXplore User",
                 customer_email: currentUser?.email || "user@goaxplore.com",

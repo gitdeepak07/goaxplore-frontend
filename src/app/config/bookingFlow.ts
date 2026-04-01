@@ -49,8 +49,9 @@ export interface BookingFlowSelection {
   participants: number
   date: string
   time: string
-  slot_id?: number | null   // ← ADD THIS
+  slot_id?: number | null   
   totalPrice: number
+  appliedOffer?: any | null
   paymentMethod?: string
   bookingCode?: string
   bookedAt?: string
