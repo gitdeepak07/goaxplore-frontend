@@ -138,7 +138,7 @@ export function AllActivitiesPage({
               <div className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] text-cyan-200">
                 Activity browser
               </div>
-              <h1 className="text-4xl font-bold text-white">Explore all activities</h1>
+              <h1 className="text-2xl sm:text-4xl font-bold text-white">Explore all activities</h1>
             </div>
             <div className="flex gap-2">
               <button

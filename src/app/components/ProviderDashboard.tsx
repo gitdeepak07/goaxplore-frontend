@@ -1122,7 +1122,7 @@ export function ProviderDashboard({ provider, onLogout, onBackToHome }: Provider
       </div>
 
       {/* Key Metrics */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
           { label: 'Total Bookings', value: filtered.length, color: 'bg-blue-600' },
           { label: 'Confirmed', value: filtered.filter(b => b.status === 'confirmed' || b.status === 'completed').length, color: 'bg-green-600' },

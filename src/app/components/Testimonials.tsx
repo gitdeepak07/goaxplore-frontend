@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Star, Send } from 'lucide-react';
+import API from '../config/api';
 
 interface Testimonial {
   id: number;
@@ -25,7 +26,7 @@ export function Testimonials({ testimonials: fallbackTestimonials, currentUser }
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    fetch('${API}/api/reviews/public')
+    fetch(`${API}/api/reviews/public`)
       .then(r => r.json())
       .then(data => {
         const raw = Array.isArray(data) ? data : [];
@@ -78,7 +79,7 @@ export function Testimonials({ testimonials: fallbackTestimonials, currentUser }
   return (
     <section className="py-16 bg-gradient-to-b from-gray-900 to-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-white mb-12">What Our Customers Say</h2>
+        <h2 className="text-2xl sm:text-4xl font-bold text-white mb-8 sm:mb-12">What Our Customers Say</h2>
 
         {/* Review Input Box */}
         <div className="bg-gray-800/50 border border-gray-700 rounded-lg p-6 mb-10">

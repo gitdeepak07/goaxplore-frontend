@@ -35,7 +35,7 @@ export function Hero({
               <Waves size={14} />
               Goa's Best Activities
             </div>
-            <h1 className="max-w-3xl text-5xl font-bold leading-tight text-white md:text-6xl">
+            <h1 className="max-w-3xl text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
               Explore the Adventure of Goa with GoaXplore!
             </h1>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">

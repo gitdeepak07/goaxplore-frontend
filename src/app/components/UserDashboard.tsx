@@ -475,13 +475,13 @@ useEffect(() => {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-12 gap-8">
-          {/* Sidebar */}
-          <div className="col-span-12 lg:col-span-3">
-            <div className="bg-gray-900 border border-gray-800 rounded-lg p-4 space-y-2">
+        <div className="grid grid-cols-12 gap-6">
+  {/* Sidebar */}
+  <div className="col-span-12 lg:col-span-3">
+    <div className="bg-gray-900 border border-gray-800 rounded-lg p-2 lg:p-4 flex flex-row lg:flex-col gap-1 overflow-x-auto lg:overflow-visible space-x-1 lg:space-x-0 lg:space-y-2">
               <button
                 onClick={() => setSelectedTab('profile')}
-                className={`w-full text-left px-4 py-3 rounded-lg flex items-center space-x-3 transition-colors ${selectedTab === 'profile' ? 'bg-red-600 text-white' : 'text-gray-400 hover:bg-gray-800'
+                className={`shrink-0 lg:w-full text-left px-4 py-3 rounded-lg flex items-center space-x-3 transition-colors whitespace-nowrap ${selectedTab === 'profile' ? 'bg-red-600 text-white' : 'text-gray-400 hover:bg-gray-800'
                   }`}
               >
                 <User size={20} />
@@ -490,7 +490,7 @@ useEffect(() => {
 
               <button
                 onClick={() => setSelectedTab('bookings')}
-                className={`w-full text-left px-4 py-3 rounded-lg flex items-center space-x-3 transition-colors ${selectedTab === 'bookings' ? 'bg-red-600 text-white' : 'text-gray-400 hover:bg-gray-800'
+                className={`shrink-0 lg:w-full text-left px-4 py-3 rounded-lg flex items-center space-x-3 transition-colors whitespace-nowrap ${selectedTab === 'bookings' ? 'bg-red-600 text-white' : 'text-gray-400 hover:bg-gray-800'
                   }`}
               >
                 <Calendar size={20} />
@@ -499,7 +499,7 @@ useEffect(() => {
 
               <button
                 onClick={() => setSelectedTab('wishlist')}
-                className={`w-full text-left px-4 py-3 rounded-lg flex items-center space-x-3 transition-colors ${selectedTab === 'wishlist' ? 'bg-red-600 text-white' : 'text-gray-400 hover:bg-gray-800'
+                className={`shrink-0 lg:w-full text-left px-4 py-3 rounded-lg flex items-center space-x-3 transition-colors whitespace-nowrap whitespace-nowrap ${selectedTab === 'wishlist' ? 'bg-red-600 text-white' : 'text-gray-400 hover:bg-gray-800'
                   }`}
               >
                 <Heart size={20} />
@@ -511,7 +511,7 @@ useEffect(() => {
 
               <button
                 onClick={() => setSelectedTab('reviews')}
-                className={`w-full text-left px-4 py-3 rounded-lg flex items-center space-x-3 transition-colors ${selectedTab === 'reviews' ? 'bg-red-600 text-white' : 'text-gray-400 hover:bg-gray-800'
+                className={`shrink-0 lg:w-full text-left px-4 py-3 rounded-lg flex items-center space-x-3 transition-colors whitespace-nowrap ${selectedTab === 'reviews' ? 'bg-red-600 text-white' : 'text-gray-400 hover:bg-gray-800'
                   }`}
               >
                 <Star size={20} />
@@ -520,7 +520,7 @@ useEffect(() => {
 
               <button
                 onClick={() => setSelectedTab('support')}
-                className={`w-full text-left px-4 py-3 rounded-lg flex items-center space-x-3 transition-colors ${selectedTab === 'support' ? 'bg-red-600 text-white' : 'text-gray-400 hover:bg-gray-800'
+                className={`shrink-0 lg:w-full text-left px-4 py-3 rounded-lg flex items-center space-x-3 transition-colors whitespace-nowrap ${selectedTab === 'support' ? 'bg-red-600 text-white' : 'text-gray-400 hover:bg-gray-800'
                   }`}
               >
                 <MessageSquare size={20} />
@@ -534,7 +534,7 @@ useEffect(() => {
 
               <button
                 onClick={() => setSelectedTab('notifications')}
-                className={`w-full text-left px-4 py-3 rounded-lg flex items-center space-x-3 transition-colors ${selectedTab === 'notifications' ? 'bg-red-600 text-white' : 'text-gray-400 hover:bg-gray-800'
+                className={`shrink-0 lg:w-full text-left px-4 py-3 rounded-lg flex items-center space-x-3 transition-colors whitespace-nowrap ${selectedTab === 'notifications' ? 'bg-red-600 text-white' : 'text-gray-400 hover:bg-gray-800'
                   }`}
               >
                 <Bell size={20} />

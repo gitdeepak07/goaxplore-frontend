@@ -346,7 +346,7 @@ export function AdminDashboard({ admin, onLogout, onBackToHome }: AdminDashboard
 
           <div className="flex items-center gap-4">
             {/* Support + Contact nav tabs */}
-            <div className="hidden md:flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <button
                 onClick={() => setSelectedTab('support')}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors ${selectedTab === 'support' ? 'bg-red-600 text-white' : 'text-gray-400 hover:text-white'}`}
@@ -478,7 +478,7 @@ export function AdminDashboard({ admin, onLogout, onBackToHome }: AdminDashboard
       </nav>
 
       {/* ================= CONTENT ================= */}
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 py-6 sm:py-8">
         {/* Success/Error Messages */}
         {successMessage && (
           <div className="mb-4 bg-green-900/50 border border-green-700 text-green-400 px-4 py-3 rounded-lg">
@@ -953,7 +953,7 @@ export function AdminDashboard({ admin, onLogout, onBackToHome }: AdminDashboard
                 <h3 className="text-lg font-semibold text-white mb-4">
                   Basic Information
                 </h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="text-sm text-gray-400">
                       Business Name
@@ -986,7 +986,7 @@ export function AdminDashboard({ admin, onLogout, onBackToHome }: AdminDashboard
                 <h3 className="text-lg font-semibold text-white mb-4">
                   Address
                 </h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="col-span-2">
                     <label className="text-sm text-gray-400">Address</label>
                     <p className="text-white">
@@ -1019,7 +1019,7 @@ export function AdminDashboard({ admin, onLogout, onBackToHome }: AdminDashboard
                 <h3 className="text-lg font-semibold text-white mb-4">
                   Business Details
                 </h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="text-sm text-gray-400">GST Number</label>
                     <p className="text-white">
@@ -1083,7 +1083,7 @@ export function AdminDashboard({ admin, onLogout, onBackToHome }: AdminDashboard
                 <h3 className="text-lg font-semibold text-white mb-4">
                   Statistics
                 </h3>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div className="bg-gray-800 p-3 rounded text-center">
                     <div className="text-2xl font-bold text-white">
                       {selectedProvider.total_bookings || 0}

@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { Target, Users, Award, Heart, Shield, Zap } from 'lucide-react';
+import API from '../config/api';
 
 
 export function AboutUs({ onExploreActivities }: { onExploreActivities: () => void }) {
   const [stats, setStats] = useState({ providers: '25+', activities: '50+', users: '10K+' });
 
   useEffect(() => {
-    fetch('${API}/api/dashboard/admin')
+    fetch(`${API}/api/dashboard/admin`)
       .then(r => r.json())
       .then(data => {
         setStats({
