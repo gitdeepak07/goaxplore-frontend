@@ -45,33 +45,33 @@ export function AboutUs({ onExploreActivities }: { onExploreActivities: () => vo
   const team = [
     {
       name: 'Ashvini Dalavai',
-      role: 'Founder & CEO',
+      role: '',
       image: '/imgs/vini.jpeg',
-      bio: '15+ years in adventure tourism'
+      bio: ''
     },
     {
       name: 'Deepak J',
-      role: 'Operations Head',
+      role: '',
       image: '/imgs/deepak.jpeg',
-      bio: 'Expert in water sports safety'
+      bio: ''
     },
     {
       name: 'Aayush Pednekar',
-      role: 'Customer Success',
+      role: '',
       image: '/imgs/aayush.jpeg',
-      bio: 'Dedicated to customer happiness'
+      bio: ''
     },
     {
       name: 'Aditya Vengurlekar',
-      role: 'Marketing Director',
+      role: '',
       image: '/imgs/aditya.jpeg',
-      bio: 'Digital marketing specialist'
+      bio: ''
     },
     {
       name: 'Atharva Tilve',
-      role: 'Technology Lead',
+      role: '',
       image: '/imgs/atharv.jpeg',
-      bio: 'Building seamless experiences'
+      bio: ''
     }
   ];
 
