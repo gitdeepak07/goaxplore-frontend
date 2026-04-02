@@ -1,5 +1,4 @@
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
-
+import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 
 const GOOGLE_MAPS_API_KEY = (import.meta as any).env?.VITE_GOOGLE_MAPS_API_KEY ?? "";
 
@@ -7,7 +6,7 @@ interface LocationMapProps {
   latitude: number;
   longitude: number;
   locationName: string;
-  height?: string;   // e.g. "300px"
+  height?: string;
 }
 
 export function LocationMap({
@@ -34,28 +33,38 @@ export function LocationMap({
 
   const center = { lat: latitude, lng: longitude };
 
+  const openDirections = () => {
+    const url = "https://www.google.com/maps/dir/?api=1&destination=" + latitude + "," + longitude + "&travelmode=driving";
+    window.open(url, "_blank");
+  };
+
   return (
-    <GoogleMap
-      center={center}
-      zoom={15}
-      mapContainerStyle={{ width: "100%", height, borderRadius: "16px" }}
-      options={{
-        disableDefaultUI: true,
-        zoomControl: true,
-        styles: [                          // dark theme to match your UI
-          { elementType: "geometry",       stylers: [{ color: "#0d1726" }] },
-          { elementType: "labels.text.stroke", stylers: [{ color: "#07111f" }] },
-          { elementType: "labels.text.fill",   stylers: [{ color: "#94a3b8" }] },
-          { featureType: "water",          elementType: "geometry", stylers: [{ color: "#0f2035" }] },
-          { featureType: "road",           elementType: "geometry", stylers: [{ color: "#1e3a5f" }] },
-          { featureType: "poi",            stylers: [{ visibility: "off" }] },
-        ],
-      }}
-    >
-      {/* <Marker */}
-        {/* // position={center} */}
-        {/* // title={locationName} */}
-    {/* //   /> */}
-    </GoogleMap>
+    <div className="space-y-3">
+      <GoogleMap
+        center={center}
+        zoom={15}
+        mapContainerStyle={{ width: "100%", height, borderRadius: "16px" }}
+        options={{
+          disableDefaultUI: true,
+          zoomControl: true,
+          styles: [
+            { elementType: "geometry",           stylers: [{ color: "#0d1726" }] },
+            { elementType: "labels.text.stroke", stylers: [{ color: "#07111f" }] },
+            { elementType: "labels.text.fill",   stylers: [{ color: "#94a3b8" }] },
+            { featureType: "water", elementType: "geometry", stylers: [{ color: "#0f2035" }] },
+            { featureType: "road",  elementType: "geometry", stylers: [{ color: "#1e3a5f" }] },
+            { featureType: "poi",   stylers: [{ visibility: "off" }] },
+          ],
+        }}
+      >
+        <Marker position={center} title={locationName} />
+      </GoogleMap>
+      <button
+        onClick={openDirections}
+        className="flex items-center justify-center gap-2 w-full rounded-2xl border border-cyan-400/30 bg-cyan-400/10 px-4 py-3 text-sm font-semibold text-cyan-300 hover:bg-cyan-400/20 transition-colors"
+      >
+        Get Directions on Google Maps
+      </button>
+    </div>
   );
 }
